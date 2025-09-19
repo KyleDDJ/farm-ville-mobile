@@ -1,11 +1,23 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import SeedCard from "@/components/SeedCard";
+import { defaultBackground } from "@/constants/Colors";
+import { SEEDS } from "@/constants/Seeds";
 
 const SeedsScreen = () => {
   return (
-	<View>
-	  <Text>SeedsScreen</Text>
-	</View>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: defaultBackground }}
+      edges={["top", "bottom"]}
+    >
+      <ScrollView contentContainerStyle={{ padding: 16 }}>
+        {SEEDS.map(seed => (
+          <SeedCard key={seed.id} seed={seed} variant="seeds" />
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

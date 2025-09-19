@@ -1,16 +1,45 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { COLORS } from "@/constants/Colors";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+
 import { Tabs } from "expo-router";
+import React from "react";
 
 export default function TabLayout() {
   return (
-    <Tabs initialRouteName="index">
+    <Tabs
+      initialRouteName="index"
+      screenOptions={{
+        tabBarActiveTintColor: COLORS.white,
+        tabBarInactiveTintColor: COLORS.gray400,
+        tabBarStyle: {
+          position: "absolute",
+          borderRadius: 30,
+          backgroundColor: COLORS.leafygreen,
+          height: 78,
+          borderTopColor: COLORS.leafygreen,
+        },
+
+        tabBarItemStyle: {
+          paddingTop: 8,
+        },
+        tabBarLabelStyle: {
+          marginTop: 5,
+          fontSize: 12,
+        },
+      }}
+    >
       <Tabs.Screen
         name="shop"
         options={{
-          title: "Shops",
+          title: "Shop",
+          // headerTitle:
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
-            <Ionicons name="play" size={focused ? 28 : 24} color={color} />
+            <MaterialCommunityIcons
+              name="basket"
+              size={focused ? 30 : 24}
+              color={color}
+            />
           ),
         }}
       />
@@ -18,9 +47,14 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Farm",
+          // headerTitle:
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
-            <Ionicons name="play" size={focused ? 28 : 24} color={color} />
+            <MaterialCommunityIcons
+              name="barn"
+              size={focused ? 30 : 24}
+              color={color}
+            />
           ),
         }}
       />
@@ -28,9 +62,14 @@ export default function TabLayout() {
         name="seeds"
         options={{
           title: "Seeds",
+          // headerTitle:
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
-            <Ionicons name="play" size={focused ? 28 : 24} color={color} />
+            <MaterialCommunityIcons
+              name="sprout"
+              size={focused ? 30 : 24}
+              color={color}
+            />
           ),
         }}
       />
