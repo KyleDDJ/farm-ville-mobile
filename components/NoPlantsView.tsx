@@ -1,5 +1,5 @@
 import { COLORS } from "@/constants/Colors";
-import FontAwesome from "@expo/vector-icons/FontAwesome5";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
@@ -8,7 +8,7 @@ type AddPlantCardProps = {
   onPress?: () => void;
 };
 
-const AddPlantCard = ({ title, onPress }: AddPlantCardProps) => {
+const AddPlantCard: React.FC<AddPlantCardProps> = ({ title, onPress }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -21,9 +21,8 @@ const AddPlantCard = ({ title, onPress }: AddPlantCardProps) => {
       }}
     >
       <View className="mb-4">
-        <FontAwesome name="leaf" size={32} color={COLORS.gray500} />
+        <FontAwesome5 name="leaf" size={32} color={COLORS.gray500} />
       </View>
-
       <Text className="text-lg font-semibold text-gray-500">{title}</Text>
     </TouchableOpacity>
   );

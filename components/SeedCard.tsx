@@ -8,14 +8,14 @@ type SeedCardProps = {
   variant?: "shop" | "seeds";
 };
 
-const SeedCard = ({ seed, variant = "seeds" }: SeedCardProps) => {
+const SeedCard: React.FC<SeedCardProps> = ({ seed, variant = "seeds" }) => {
   const seedImages: Record<string, any> = {
     Carrot: require("@/assets/seeds/carrot.png"),
     Potato: require("@/assets/seeds/potato.png"),
     Cabbage: require("@/assets/seeds/cabbage.png"),
   };
 
-  const imageSource = seedImages[seed.title] || null;
+  const imageSource = seedImages[seed.title];
 
   return (
     <View
@@ -35,12 +35,12 @@ const SeedCard = ({ seed, variant = "seeds" }: SeedCardProps) => {
         <Text className="text-lg font-semibold text-gray-800 mb-2">
           {seed.title}
         </Text>
-        <Text className=" mb-1" style={{ color: defaultTextColor }}>
+        <Text className="mb-1" style={{ color: defaultTextColor }}>
           Harvest in {seed.estimated}
         </Text>
 
         {variant === "seeds" ? (
-          <Text className=" mb-1" style={{ color: defaultTextColor }}>
+          <Text className="mb-1" style={{ color: defaultTextColor }}>
             {seed.stock}
           </Text>
         ) : (

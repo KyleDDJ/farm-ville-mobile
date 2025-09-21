@@ -1,27 +1,29 @@
-import React from "react";
+import SeedCard from "@/components/SeedCard";
+import { defaultBackground } from "@/constants/Colors";
+import { useSeeds } from "@/context/SeedsContext";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import React, { useRef } from "react";
 import { ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import SeedCard from "@/components/SeedCard";
-import { defaultBackground } from "@/constants/Colors";
-import { SEEDS } from "@/constants/Seeds";
-
 const ShopScreen = () => {
-  const handlePress = (seedTitle: string) => {
-    console.log("Pressed:", seedTitle);
+  const { seeds } = useSeeds();
+
+  const seedsSheetRef = useRef<BottomSheetModal>(null);
+
+  const handlePress = (seedId: number) => {
+    console.log("Pressed seed", seedId);
+    // trigger purchase logic here
   };
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: defaultBackground }}
-      edges={["top", "bottom"]}
-    >
+    <SafeAreaView style={{ flex: 1, backgroundColor: defaultBackground }}>
       <ScrollView contentContainerStyle={{ padding: 16 }}>
-        {SEEDS.map(seed => (
+        {seeds.map(seed => (
           <TouchableOpacity
             key={seed.id}
             activeOpacity={0.7}
-            onPress={() => handlePress(seed.title)}
+            onPress={() => handlePress(seed.id)}
           >
             <SeedCard seed={seed} variant="shop" />
           </TouchableOpacity>

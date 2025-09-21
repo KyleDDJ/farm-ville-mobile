@@ -10,12 +10,12 @@ type AddCardProps = {
   borderStyle?: "solid" | "dashed";
 };
 
-const AddCard = ({
+const AddCard: React.FC<AddCardProps> = ({
   title,
   onPress,
   borderColor = COLORS.leafygreen1,
   borderStyle = "dashed",
-}: AddCardProps) => {
+}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -30,7 +30,6 @@ const AddCard = ({
       <View className="mb-4">
         <FontAwesome5 name="leaf" size={32} color={COLORS.leafygreen1} />
       </View>
-
       <Text
         className="text-lg font-semibold"
         style={{ color: COLORS.leafygreen1 }}

@@ -5,7 +5,11 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import * as Progress from "react-native-progress";
 
-const SeedDashboard = ({ seed }: { seed: Seeds }) => {
+type SeedDashboardProps = {
+  seed: Seeds;
+};
+
+const SeedDashboard: React.FC<SeedDashboardProps> = ({ seed }) => {
   return (
     <View className="mb-4">
       <View

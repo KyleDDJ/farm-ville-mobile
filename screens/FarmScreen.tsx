@@ -7,15 +7,13 @@ import { defaultBackground } from "@/constants/Colors";
 import { SEEDS } from "@/constants/Seeds";
 import SeedDashboard from "@/screens/SeedsDashboard";
 
-const FarmScreen = () => {
-  const [showSeeds, setShowSeeds] = useState(false);
+const FarmScreen: React.FC = () => {
+  const [show_seeds, setShowSeeds] = useState(false);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: defaultBackground }}>
-      {!showSeeds ? (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
+      {!show_seeds ? (
+        <View style={{ paddingTop: 16, alignItems: "center" }}>
           <AddPlantCard
             title="Add a Plant"
             onPress={() => setShowSeeds(true)}
@@ -25,7 +23,7 @@ const FarmScreen = () => {
         <FlatList
           data={SEEDS}
           keyExtractor={item => item.id.toString()}
-          contentContainerStyle={{ padding: 15 }}
+          contentContainerStyle={{ padding: 10 }}
           renderItem={({ item }) => <SeedDashboard seed={item} />}
           ListFooterComponent={
             <View style={{ marginTop: 5, alignItems: "center" }}>
