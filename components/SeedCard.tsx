@@ -9,24 +9,16 @@ type SeedCardProps = {
 };
 
 const SeedCard: React.FC<SeedCardProps> = ({ seed, variant = "seeds" }) => {
-  const seedImages: Record<string, any> = {
-    Carrot: require("@/assets/seeds/carrot.png"),
-    Potato: require("@/assets/seeds/potato.png"),
-    Cabbage: require("@/assets/seeds/cabbage.png"),
-  };
-
-  const imageSource = seedImages[seed.title];
-
   return (
     <View
       className="flex-row p-4 rounded-xl mb-4"
       style={{ backgroundColor: defaultCardBackground }}
     >
-      {imageSource && (
+      {seed.image && (
         <Image
-          source={imageSource}
+          source={seed.image}
           resizeMode="contain"
-          className="w-28 h-28 mr-4"
+          className="w-28 h-28 mr-4 rounded"
           style={seed.title !== "Carrot" ? { borderRadius: 12 } : undefined}
         />
       )}
