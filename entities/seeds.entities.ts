@@ -1,15 +1,16 @@
 export type Seeds = {
   id: number;
-  title: string;
-  estimated: string;
+  name: string;
+  harvestTime: string;
   stock: string;
   profit: string;
-  status?: string;
-  cost?: string;
+  cost: string;
+  status?: 'available' | 'planted' | 'growing' | 'ready' | 'harvested';
   isActive?: boolean;
-  type?: "seeds",
+  category?: 'vegetable' | 'fruit' | 'grain' | 'flower' | 'tree';
   elapsed?: number;
-  startedAt?: Date;  
-  completedAt?: Date;   
+  plantedAt?: Date;
+  harvestReadyAt?: Date;
+  harvestedAt?: Date; 
   image?: any; 
 };

@@ -21,7 +21,7 @@ const SeedDashboard: React.FC<SeedDashboardProps> = ({ seed }) => {
       >
         <View className="flex-1">
           <Text className="text-xl font-bold text-gray-800 mb-2">
-            {seed.title}
+            {seed.name}
           </Text>
           <Text className="text-gray-600 mb-3 text-base">
             Harvest in: <Text className="font-mono text-base">00:04:20</Text>
@@ -38,7 +38,7 @@ const SeedDashboard: React.FC<SeedDashboardProps> = ({ seed }) => {
         <TouchableOpacity
           className="ml-3 rounded-lg p-3"
           style={{ backgroundColor: COLORS.leafygreen }}
-          onPress={() => console.log("Remove seed", seed.id)}
+          onPress={() => console.log("Remove seed")}
         >
           <Icons.Feather name="x" size={22} color={COLORS.white} />
         </TouchableOpacity>

@@ -19,16 +19,16 @@ const SeedCard: React.FC<SeedCardProps> = ({ seed, variant = "seeds" }) => {
           source={seed.image}
           resizeMode="contain"
           className="w-28 h-28 mr-4 rounded"
-          style={seed.title !== "Carrot" ? { borderRadius: 12 } : undefined}
+          style={seed.name !== "Carrot" ? { borderRadius: 12 } : undefined}
         />
       )}
 
       <View className="flex-1 justify-between">
         <Text className="text-lg font-semibold text-gray-800 mb-2">
-          {seed.title}
+          {seed.name}
         </Text>
         <Text className="mb-1" style={{ color: defaultTextColor }}>
-          Harvest in {seed.estimated}
+          Harvest in {seed.harvestTime}
         </Text>
 
         {variant === "seeds" ? (
