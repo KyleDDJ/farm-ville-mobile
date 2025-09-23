@@ -6,7 +6,6 @@ type SeedsContextType = {
   seeds: Seeds[];
   addSeed: (seed: Seeds) => void;
   removeSeed: (id: number) => void;
-  updateSeed: (updatedSeed: Seeds) => void;
 };
 
 const SeedsContext = createContext<SeedsContextType | undefined>(undefined);
@@ -17,13 +16,9 @@ export const SeedsProvider = ({ children }: { children: ReactNode }) => {
   const addSeed = (seed: Seeds) => setSeeds(prev => [...prev, seed]);
   const removeSeed = (id: number) =>
     setSeeds(prev => prev.filter(seed => seed.id !== id));
-  const updateSeed = (updatedSeed: Seeds) =>
-    setSeeds(prev =>
-      prev.map(seed => (seed.id === updatedSeed.id ? updatedSeed : seed))
-    );
 
   return (
-    <SeedsContext.Provider value={{ seeds, addSeed, removeSeed, updateSeed }}>
+    <SeedsContext.Provider value={{ seeds, addSeed, removeSeed }}>
       {children}
     </SeedsContext.Provider>
   );

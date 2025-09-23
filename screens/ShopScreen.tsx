@@ -15,7 +15,7 @@ import { COLORS, defaultBackground } from "@/constants/Colors";
 import { SEEDS } from "@/constants/Seeds";
 
 const ShopScreen = () => {
-  const [selectedSeed, setSelectedSeed] = useState(null);
+  const [selected_seed, setSelectedSeed] = useState(null);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 

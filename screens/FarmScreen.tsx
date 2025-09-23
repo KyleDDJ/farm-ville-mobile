@@ -14,31 +14,53 @@ import AddPlantCard from "@/components/PlantButton";
 import SeedCard from "@/components/SeedCard";
 import { COLORS, defaultBackground } from "@/constants/Colors";
 import { SEEDS } from "@/constants/Seeds";
+import { useSeeds } from "@/context/SeedsContext";
 import { Seeds } from "@/entities/seeds.entities";
 import SeedDashboard from "@/screens/SeedsDashboard";
 
 const FarmScreen: React.FC = () => {
-  const [show_seeds, setShowSeeds] = useState(false);
+  const [selectedSeed, setSelectedSeed] = useState<Seeds | null>(null);
+  const { seeds, addSeed } = useSeeds();
+
+  const plantedSeeds = seeds.filter(
+    seed => seed.status === "planted" || seed.status === "growing"
+  );
+  const hasPlantedSeeds = plantedSeeds.length > 0;
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ["60%"], []);
+  const snapPoints = useMemo(() => ["65%"], []);
 
-  const handlePlantAgain = () => {
-    console.log("opening bottom sheet");
+  const handleAddPlant = () => {
     bottomSheetModalRef.current?.present();
   };
 
-  const handleSeedSelect = (seed: any) => {
-    console.log("Selected seed:", seed.title);
+  const handlePlantAgain = () => {
+    bottomSheetModalRef.current?.present();
+  };
+
+  const handleSeedSelect = (seed: Seeds) => {
+    setSelectedSeed(seed);
   };
 
   const handlePlantNow = () => {
-    console.log("Plant Now button pressed");
-    bottomSheetModalRef.current?.dismiss();
+    if (selectedSeed) {
+      const newPlantedSeed: Seeds = {
+        ...selectedSeed,
+        id: Date.now(),
+        status: "planted",
+        plantedAt: new Date(),
+        harvestReadyAt: new Date(Date.now() + 5 * 60 * 1000),
+      };
+
+      addSeed(newPlantedSeed);
+
+      setSelectedSeed(null);
+      bottomSheetModalRef.current?.dismiss();
+    }
   };
 
   const handleCancel = () => {
-    console.log("Cancel button pressed");
+    setSelectedSeed(null);
     bottomSheetModalRef.current?.dismiss();
   };
 
@@ -46,24 +68,35 @@ const FarmScreen: React.FC = () => {
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={() => handleSeedSelect(item)}
+      className={`rounded-2xl mb-2 ${
+        selectedSeed?.id === item.id ? "border-2" : "border-0"
+      }`}
+      style={{
+        borderColor:
+          selectedSeed?.id === item.id ? COLORS.leafygreen1 : "transparent",
+      }}
     >
       <SeedCard seed={item} variant="seeds" />
     </TouchableOpacity>
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: defaultBackground }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: defaultBackground,
+        paddingBottom: 100,
+      }}
+    >
       <EarningsSummary />
-      {!show_seeds ? (
+
+      {!hasPlantedSeeds ? (
         <View style={{ paddingTop: 16, alignItems: "center" }}>
-          <AddPlantCard
-            title="Add a Plant"
-            onPress={() => setShowSeeds(true)}
-          />
+          <AddPlantCard title="Add a Plant" onPress={handleAddPlant} />
         </View>
       ) : (
         <FlatList
-          data={SEEDS}
+          data={plantedSeeds}
           keyExtractor={item => item.id.toString()}
           contentContainerStyle={{ padding: 10 }}
           renderItem={({ item }) => <SeedDashboard seed={item} />}
@@ -114,9 +147,12 @@ const FarmScreen: React.FC = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              className="flex-1 rounded-lg py-3"
+              className={`flex-1 rounded-lg py-3 ${
+                !selectedSeed ? "opacity-50" : ""
+              }`}
               style={{ backgroundColor: COLORS.leafygreen1 }}
-              onPress={handlePlantNow} //Button will be unavailable if the seed being purchased costs more than earnings
+              onPress={handlePlantNow}
+              disabled={!selectedSeed}
             >
               <Text className="text-center text-white text-lg font-semibold">
                 Plant Now

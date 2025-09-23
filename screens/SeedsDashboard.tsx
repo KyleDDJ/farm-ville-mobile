@@ -1,4 +1,8 @@
-import { COLORS, defaultCardBackground } from "@/constants/Colors";
+import {
+  COLORS,
+  defaultCardBackground,
+  defaultTextColor,
+} from "@/constants/Colors";
 import { Seeds } from "@/entities/seeds.entities";
 import * as Icons from "@expo/vector-icons";
 import React from "react";
@@ -20,7 +24,10 @@ const SeedDashboard: React.FC<SeedDashboardProps> = ({ seed }) => {
         }}
       >
         <View className="flex-1">
-          <Text className="text-xl font-bold text-gray-800 mb-2">
+          <Text
+            className="text-xl font-bold mb-2"
+            style={{ color: defaultTextColor }}
+          >
             {seed.name}
           </Text>
           <Text className="text-gray-600 mb-3 text-base">
